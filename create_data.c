@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 06:26:41 by sutku             #+#    #+#             */
-/*   Updated: 2023/02/18 11:08:08 by sutku            ###   ########.fr       */
+/*   Updated: 2023/02/20 16:37:24 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ void	create_data(t_map *map, t_player *p)
 	map-> width = 0;
 	map-> height = 0;
 	map-> map_arr = NULL;
+	p->p_num_mov = 0;
 }
