@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:05:55 by sutku             #+#    #+#             */
-/*   Updated: 2023/02/18 15:42:52 by sutku            ###   ########.fr       */
+/*   Updated: 2023/02/22 20:13:49 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,33 +28,33 @@ void	error_message(char *ptr)
 	exit(-1);
 }
 
-void	check_map(t_map *map, t_player *player)
+void	check_map(t_game *game)
 {
-	check_map_assets(map);
-	check_num_assets(map);
-	check_valid_path(map, player);
-	check_collectable(map, player);
+	check_map_assets(game);
+	check_num_assets(game);
+	check_valid_path(game);
+	check_collectable(game);
 }
 
-void	check_map_assets(t_map *map)
+void	check_map_assets(t_game *game)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < map->height)
+	while (i < game->height)
 	{
 		j = 0;
-		while (j < map->width)
+		while (j < game->width)
 		{
-			if ((i == 0 || i == map->height - 1) && map->map_arr[i][j] != '1')
+			if ((i == 0 || i == game->height - 1) && game->map_arr[i][j] != '1')
 				error_message(W_ERROR);
-			if ((j == 0 || j == map->width - 1) && map->map_arr[i][j] != '1')
+			if ((j == 0 || j == game->width - 1) && game->map_arr[i][j] != '1')
 				error_message(W_ERROR);
 			else
-				if ((map->map_arr[i][j] != '0') && (map->map_arr[i][j] != 'C')
-				&& (map-> map_arr[i][j] != '1') && (map->map_arr[i][j] != 'E')
-				&& (map->map_arr[i][j] != 'K') && (map->map_arr[i][j] != 'P'))
+				if ((game->map_arr[i][j] != '0') && (game->map_arr[i][j] != 'C')
+				&& (game-> map_arr[i][j] != '1') && (game->map_arr[i][j] != 'E')
+				&& (game->map_arr[i][j] != 'X') && (game->map_arr[i][j] != 'P'))
 					error_message(I_MAP);
 			j++;
 		}
@@ -62,14 +62,14 @@ void	check_map_assets(t_map *map)
 	}
 }
 
-void	check_num_assets(t_map *map)
+void	check_num_assets(t_game *game)
 {
-	if (map->collectable < 1)
+	if (game->collectable < 1)
 		error_message(C_ERROR);
-	if (map->e_xit != 1)
+	if (game->e_xit != 1)
 		error_message(EXIT_E);
-	if (map -> player != 1)
+	if (game -> player != 1)
 		error_message(P_ERROR);
-	if (map->enemy != 1)
+	if (game->enemy != 1)
 		error_message(E_ERROR);
 }
