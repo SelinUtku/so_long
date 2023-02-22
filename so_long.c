@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:08:02 by sutku             #+#    #+#             */
-/*   Updated: 2023/02/20 16:30:30 by sutku            ###   ########.fr       */
+/*   Updated: 2023/02/22 20:20:39 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,24 @@
 
 int32_t	main(void)
 {
-	t_map			map;
-	t_player		player;
+	t_game			game;
 	mlx_t			*mlx;
+	t_images		img;
 
-	create_data(&map, &player);
-	measure_map(&map, "./map/map.ber");
-	put_map_to_arr(&map, &player, "./map/map.ber");
-	read_map(&map, &player);
-	check_map(&map, &player);
+	game.mlx = mlx;
+	create_data(&game);
+	measure_map(&game, "./map/map.ber");
+	put_map_to_arr(&game, "./map/map.ber");
+	read_map(&game);
+	check_map(&game);
 	mlx = mlx_init(WIDTH, HEIGHT, "so_long", true);
 	if (!mlx)
-		return(EXIT_FAILURE);
-	put_bg_to_map(&map, mlx);
-	player_image(&map, mlx, &player);
-	mlx_key_hook(mlx, &my_hook, &player);
+		return (EXIT_FAILURE);
+	put_assets_to_images(mlx, &img, &game);
+	put_assets_to_map(mlx, &game, &img);
+	mlx_key_hook(mlx, &my_hook, &game);
 	mlx_loop(mlx);
-	//close_images();
+	// close_images();
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
 }

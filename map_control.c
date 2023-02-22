@@ -6,13 +6,13 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 19:37:10 by sutku             #+#    #+#             */
-/*   Updated: 2023/02/18 16:58:30 by sutku            ###   ########.fr       */
+/*   Updated: 2023/02/22 19:55:10 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	measure_map(t_map *map, char *path)
+void	measure_map(t_game *game, char *path)
 {
 	int		i;
 	int		width;
@@ -40,12 +40,12 @@ void	measure_map(t_map *map, char *path)
 		arr = get_next_line(fd);
 		count++;
 	}
-	map->height = count;
-	map->width = i;
+	game->height = count;
+	game->width = i;
 	close(fd);
 }
 
-void	put_map_to_arr(t_map *map, t_player *p, char *path)
+void	put_map_to_arr(t_game *game, char *path)
 {
 	int	fd;
 	int	i;
@@ -55,43 +55,43 @@ void	put_map_to_arr(t_map *map, t_player *p, char *path)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return ;
-	map->map_arr = malloc((map-> height * sizeof(char *)) + 1);
-	map->map_arr[i] = get_next_line(fd);
-	while (map-> map_arr[i] != NULL)
+	game->map_arr = malloc((game-> height * sizeof(char *)) + 1);
+	game->map_arr[i] = get_next_line(fd);
+	while (game-> map_arr[i] != NULL)
 	{
 		i++;
-		map->map_arr[i] = get_next_line(fd);
+		game->map_arr[i] = get_next_line(fd);
 	}
 	close(fd);
 }
 
-void	read_map(t_map *map, t_player *player)
+void	read_map(t_game *game)
 {
 	int	i;
 	int	j;
 
 	i = -1;
-	while (++i < map->height)
+	while (++i < game->height)
 	{
 		j = -1;
-		while (++j < map->width)
+		while (++j < game->width)
 		{
-			if (map-> map_arr[i][j] == 'C')
-				map->collectable++;
-			else if (map-> map_arr[i][j] == 'P')
+			if (game-> map_arr[i][j] == 'C')
+				game->collectable++;
+			else if (game-> map_arr[i][j] == 'P')
 			{
-				player->cur[0] = i;
-				player->cur[1] = j;
-				map-> player++;
+				game->p_cur[0] = i;
+				game->p_cur[1] = j;
+				game-> player++;
 			}
-			else if (map-> map_arr[i][j] == 'E')
+			else if (game-> map_arr[i][j] == 'E')
 			{
-				map->exit_idx[0] = i;
-				map->exit_idx[1] = j;
-				map->e_xit++;
+				game->exit_idx[0] = i;
+				game->exit_idx[1] = j;
+				game->e_xit++;
 			}
-			else if (map-> map_arr[i][j] == 'K')
-				map-> enemy++;
+			else if (game-> map_arr[i][j] == 'X')
+				game-> enemy++;
 		}
 	}
 }
