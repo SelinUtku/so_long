@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:17:16 by sutku             #+#    #+#             */
-/*   Updated: 2023/02/22 20:36:11 by sutku            ###   ########.fr       */
+/*   Updated: 2023/02/23 17:11:58 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,15 @@ typedef struct s_images
 	xpm_t		*wall;
 	xpm_t		*door;
 	xpm_t		*coll;
+	xpm_t		*ruby;
+	xpm_t		*rip;
+	mlx_image_t	*rip_img;
 	mlx_image_t	*c_img;
 	mlx_image_t	*score;
+	mlx_image_t	*score_point;
+	mlx_image_t	*ruby_img;
 	mlx_image_t	*num_col;
+	mlx_image_t	*remain_col;
 	mlx_image_t	*d_img;
 	mlx_image_t	*w_img;
 	mlx_image_t	*bg_img;
@@ -66,12 +72,16 @@ typedef struct s_game
 	int			p_old[2];
 	int			p_move[2];
 	int			p_num_mov;
+	char		*mov_arr;
+	char		*rem_c_arr;
+	mlx_image_t	*msg;
+	int			exist_msg;
 	xpm_t		*ply;
 	mlx_image_t	*p_img;
 	mlx_t		*mlx;
 	t_images	*imgs;
+	int			game_state;
 }t_game;
-
 
 void			open_image(char *str);
 void			error_message(char *ptr);
@@ -87,11 +97,12 @@ bool			**dfs_visited(t_game *game);
 bool			dfs_e(t_game *game, int i, int j, bool **visit);
 bool			dfs_c(t_game *game, int i, int j, bool **visit);
 void			check_collectable(t_game *game);
-// void			hook(void *move);
-// void			close_images(void);
 mlx_image_t		*put_image_to_map(mlx_t *mlx, char *path);
 void			put_assets_to_map(mlx_t *mlx, t_game *game, t_images *img);
 void			put_assets_to_images(mlx_t *mlx, t_images *img, t_game *game);
 void			my_hook(mlx_key_data_t k_data, void *param);
+void			delete_images(mlx_t *mlx, t_game *game);
+void			string_to_map(t_game *game);
+void			delete_strings(t_game *game);
 
 #endif
