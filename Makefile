@@ -6,13 +6,13 @@
 #    By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 17:03:42 by sutku             #+#    #+#              #
-#    Updated: 2023/02/20 14:53:31 by sutku            ###   ########.fr        #
+#    Updated: 2023/02/25 23:06:30 by sutku            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .SILENT:
 
-SL_SRC		=	so_long.c error.c put_image.c map_control.c create_data.c map_assets.c movements.c
+SL_SRC		=	so_long.c error.c put_image.c map_control.c create_data.c map_assets.c movements.c directions.c
 SL_OBJ		=	$(SL_SRC:.c=.o)
 
 GNL_SRC		=	gnl/get_next_line_utils.c gnl/get_next_line.c

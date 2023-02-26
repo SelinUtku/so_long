@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 19:37:10 by sutku             #+#    #+#             */
-/*   Updated: 2023/02/22 19:55:10 by sutku            ###   ########.fr       */
+/*   Updated: 2023/02/26 07:33:07 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,11 @@ void	read_map(t_game *game)
 				game->e_xit++;
 			}
 			else if (game-> map_arr[i][j] == 'X')
+			{
+				game->en_idx[0] = i;
+				game->en_idx[1] = j;
 				game-> enemy++;
+			}
 		}
 	}
 }

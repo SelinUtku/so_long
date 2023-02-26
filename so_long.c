@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:08:02 by sutku             #+#    #+#             */
-/*   Updated: 2023/02/23 10:17:43 by sutku            ###   ########.fr       */
+/*   Updated: 2023/02/26 06:07:06 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int32_t	main(void)
 	t_game			game;
 	mlx_t			*mlx;
 	t_images		img;
+	t_string		str;
 
 	create_data(&game);
 	measure_map(&game, "./map/map.ber");
@@ -31,6 +32,7 @@ int32_t	main(void)
 	game.mlx = mlx;
 	put_assets_to_images(game.mlx, &img, &game);
 	put_assets_to_map(game.mlx, &game, &img);
+	string_to_map(&game, &str);
 	mlx_key_hook(game.mlx, &my_hook, &game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
