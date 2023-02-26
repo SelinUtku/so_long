@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:17:16 by sutku             #+#    #+#             */
-/*   Updated: 2023/02/26 07:26:42 by sutku            ###   ########.fr       */
+/*   Updated: 2023/02/26 18:14:40 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,14 @@
 # define LOAD_XPM "Loading Xpm.42 Error"
 # define MLX_TEXTURE "Texture to image Error"
 # define MLX_IMG_WND "Image to window Error"
+# define ARGC_ERROR "Number of argc is wrong"
 
 typedef struct s_images
 {
-	mlx_image_t	*p_img;
+	mlx_image_t	*p_down;
+	mlx_image_t	*p_left;
+	mlx_image_t	*p_right;
+	mlx_image_t	*p_up;
 	mlx_image_t	*rip_img;
 	mlx_image_t	*c_img;
 	mlx_image_t	*ruby_img;
@@ -84,6 +88,7 @@ typedef struct s_game
 	t_images	*old_images;
 	t_string	*str;
 	t_string	*old_str;
+	int			drc;
 }t_game;
 
 void			open_image(char *str);

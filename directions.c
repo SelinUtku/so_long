@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 22:45:54 by sutku             #+#    #+#             */
-/*   Updated: 2023/02/26 07:51:18 by sutku            ###   ########.fr       */
+/*   Updated: 2023/02/26 16:58:11 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	move_up(t_game *game, int i, int j)
 		game->map_arr[i - 1][j] = 'P';
 		game->p_cur[0] = i - 1;
 		game->map_arr[i][j] = '0';
-		mlx_delete_image(game->mlx, game->imgs->p_img);
+		game->drc = 1;
+		mlx_delete_image(game->mlx, game->imgs->p_up);
 		game->p_num_mov++;
 	}
 	put_assets_to_images(game->mlx, game->imgs, game);
@@ -71,7 +72,8 @@ void	move_down(t_game *game, int i, int j)
 		game->map_arr[i + 1][j] = 'P';
 		game->p_cur[0] = i + 1;
 		game->map_arr[i][j] = '0';
-		mlx_delete_image(game->mlx, game->imgs->p_img);
+		game->drc = 0;
+		mlx_delete_image(game->mlx, game->imgs->p_down);
 		game->p_num_mov++;
 	}
 	put_assets_to_images(game->mlx, game->imgs, game);
@@ -93,7 +95,8 @@ void	move_left(t_game *game, int i, int j)
 		game->map_arr[i][j - 1] = 'P';
 		game->p_cur[1] = j - 1;
 		game->map_arr[i][j] = '0';
-		mlx_delete_image(game->mlx, game->imgs->p_img);
+		game->drc = 2;
+		mlx_delete_image(game->mlx, game->imgs->p_left);
 		game->p_num_mov++;
 	}
 	put_assets_to_images(game->mlx, game->imgs, game);
@@ -115,7 +118,8 @@ void	move_right(t_game *game, int i, int j)
 		game->map_arr[i][j + 1] = 'P';
 		game->p_cur[1] = j + 1;
 		game->map_arr[i][j] = '0';
-		mlx_delete_image(game->mlx, game->imgs->p_img);
+		game->drc = 3;
+		mlx_delete_image(game->mlx, game->imgs->p_right);
 		game->p_num_mov++;
 	}
 	put_assets_to_images(game->mlx, game->imgs, game);
