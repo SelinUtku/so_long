@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:17:16 by sutku             #+#    #+#             */
-/*   Updated: 2023/02/23 17:11:58 by sutku            ###   ########.fr       */
+/*   Updated: 2023/02/26 07:26:42 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,29 +39,32 @@
 
 typedef struct s_images
 {
-	xpm_t		*bg;
-	xpm_t		*wall;
-	xpm_t		*door;
-	xpm_t		*coll;
-	xpm_t		*ruby;
-	xpm_t		*rip;
+	mlx_image_t	*p_img;
 	mlx_image_t	*rip_img;
 	mlx_image_t	*c_img;
-	mlx_image_t	*score;
-	mlx_image_t	*score_point;
 	mlx_image_t	*ruby_img;
-	mlx_image_t	*num_col;
-	mlx_image_t	*remain_col;
 	mlx_image_t	*d_img;
 	mlx_image_t	*w_img;
 	mlx_image_t	*bg_img;
+	mlx_image_t	*win_img;
+	mlx_image_t	*en_one_img;
+	mlx_image_t	*en_two_img;
 }t_images;
+
+typedef struct s_string
+{
+	mlx_image_t	*score;
+	mlx_image_t	*score_point;
+	mlx_image_t	*num_col;
+	mlx_image_t	*remain_col;
+}t_string;
 
 typedef struct s_game
 {
 	int			collectable;
 	int			player;
 	int			enemy;
+	int			en_idx[2];
 	int			e_xit;
 	int			exit_idx[2];
 	int			width;
@@ -69,18 +72,18 @@ typedef struct s_game
 	int			col_index[2];
 	char		**map_arr;
 	int			p_cur[2];
-	int			p_old[2];
-	int			p_move[2];
 	int			p_num_mov;
 	char		*mov_arr;
 	char		*rem_c_arr;
-	mlx_image_t	*msg;
 	int			exist_msg;
-	xpm_t		*ply;
-	mlx_image_t	*p_img;
-	mlx_t		*mlx;
-	t_images	*imgs;
 	int			game_state;
+	mlx_t		*mlx;
+	mlx_image_t	*msg;
+	mlx_image_t	*old_player;
+	t_images	*imgs;
+	t_images	*old_images;
+	t_string	*str;
+	t_string	*old_str;
 }t_game;
 
 void			open_image(char *str);
@@ -101,8 +104,12 @@ mlx_image_t		*put_image_to_map(mlx_t *mlx, char *path);
 void			put_assets_to_map(mlx_t *mlx, t_game *game, t_images *img);
 void			put_assets_to_images(mlx_t *mlx, t_images *img, t_game *game);
 void			my_hook(mlx_key_data_t k_data, void *param);
-void			delete_images(mlx_t *mlx, t_game *game);
-void			string_to_map(t_game *game);
-void			delete_strings(t_game *game);
+void			delete_images(mlx_t *mlx, t_images *img);
+void			string_to_map(t_game *game, t_string *str);
+void			delete_strings(mlx_t *mlx, t_string *old_str);
+void			move_up(t_game *game, int i, int j);
+void			move_down(t_game *game, int i, int j);
+void			move_left(t_game *game, int i, int j);
+void			move_right(t_game *game, int i, int j);
 
 #endif
