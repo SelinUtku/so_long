@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:08:02 by sutku             #+#    #+#             */
-/*   Updated: 2023/02/26 06:07:06 by sutku            ###   ########.fr       */
+/*   Updated: 2023/02/26 16:04:18 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 #define WIDTH 1600//16*20*5
 #define HEIGHT 900//16*10*5
 
-int32_t	main(void)
+int32_t	main(int argc, char **argv)
 {
 	t_game			game;
 	mlx_t			*mlx;
 	t_images		img;
 	t_string		str;
 
+	if (argc != 2)
+		error_message(ARGC_ERROR);
 	create_data(&game);
-	measure_map(&game, "./map/map.ber");
-	put_map_to_arr(&game, "./map/map.ber");
+	measure_map(&game, argv[1]);
+	put_map_to_arr(&game, argv[1]);
 	read_map(&game);
 	check_map(&game);
 	mlx = mlx_init(WIDTH, HEIGHT, "so_long", true);
