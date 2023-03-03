@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:10:23 by sutku             #+#    #+#             */
-/*   Updated: 2023/02/26 18:25:44 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/03 20:14:43 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,13 @@ mlx_image_t	*put_image_to_map(mlx_t *mlx, char *path)
 void	put_assets_to_images(mlx_t *mlx, t_images *img, t_game *game)
 {
 	if (game->imgs != NULL)
+		delete_images(game->mlx, game->imgs);
+	if (game->game_state == -1)
 	{
-		game->old_images = game->imgs;
-		delete_images(game->mlx, game->old_images);
+		img->rip_img = put_image_to_map(game->mlx, "./img/rip.xpm42");
+		if (mlx_image_to_window(game -> mlx, game->imgs->rip_img, 500, 100) < 0)
+			error_message(MLX_IMG_WND);
+		return ;
 	}
 	img->bg_img = put_image_to_map(mlx, "./img/background.xpm42");
 	img->p_down = put_image_to_map(mlx, "./img/fox.xpm42");
@@ -56,8 +60,7 @@ void	put_assets_to_images(mlx_t *mlx, t_images *img, t_game *game)
 	img->ruby_img = put_image_to_map(mlx, "./img/ruby.xpm42");
 	img->rip_img = put_image_to_map(mlx, "./img/rip.xpm42");
 	img->win_img = put_image_to_map(mlx, "./img/win.xpm42");
-	img->en_one_img = put_image_to_map(mlx, "./img/en1.xpm42");
-	// img->en_two_img = put_image_to_map(mlx, "./img/en2.xpm42");
+	img->en_one_img = put_image_to_map(mlx, "./img/bomb2.xpm42");
 	put_assets_to_map(game->mlx, game, img);
 }
 
@@ -67,25 +70,19 @@ void	put_assets_to_map(mlx_t *mlx, t_game *game, t_images *img)
 	int				j;
 
 	i = -1;
-	if (game->game_state == -1)
-	{
-		if (mlx_image_to_window(game -> mlx, game->imgs->rip_img, 500, 100) < 0)
-			error_message(MLX_IMG_WND);
-		return ;
-	}
 	if (game->game_state == 1)
 	{
 		if (mlx_image_to_window(game -> mlx, game->imgs->win_img, 500, 100) < 0)
 			error_message(MLX_IMG_WND);
 		return ;
 	}
-	if (mlx_image_to_window(mlx, img->bg_img, 0, 0) < 0)
-		error_message(MLX_IMG_WND);
 	while (++i < game->height)
 	{
 		j = -1;
 		while (++j < game->width)
 		{
+			if (mlx_image_to_window(mlx, img->bg_img, j * 80, i * 80) < 0)
+				error_message(MLX_IMG_WND);
 			if (game->drc == 0 && game->map_arr[i][j] == 'P' && game->game_state == 0)
 				if (mlx_image_to_window(mlx, img->p_down, j * 80 , i * 80) < 0)
 					error_message(MLX_IMG_WND);
@@ -111,7 +108,7 @@ void	put_assets_to_map(mlx_t *mlx, t_game *game, t_images *img)
 				if (mlx_image_to_window(mlx, img->d_img, j * 80 , i * 80) < 0)
 					error_message(MLX_IMG_WND);
 			if (game->map_arr[i][j] == 'X' && game->game_state == 0)
-				if (mlx_image_to_window(mlx, img->en_one_img, j * 80 , i * 80) < 0)
+				if (mlx_image_to_window(game->mlx, img->en_one_img, j * 80 , i * 80) < 0)
 					error_message(MLX_IMG_WND);
 		}
 	}
@@ -130,7 +127,10 @@ void	delete_images(mlx_t *mlx, t_images *img)
 	mlx_delete_image(mlx, img->p_left);
 	mlx_delete_image(mlx, img->p_right);
 	mlx_delete_image(mlx, img->win_img);
-	mlx_delete_image(mlx, img->rip_img);
-	mlx_delete_image(mlx, img->en_one_img);
-	// mlx_delete_image(mlx, img->en_two_img);
+	if(img->rip_img)
+		mlx_delete_image(mlx, img->rip_img);
+	if (img->en_one_img)
+		mlx_delete_image(mlx, img->en_one_img);
+	if (img->en_two_img)
+		mlx_delete_image(mlx, img->en_two_img);
 }

@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 13:06:38 by sutku             #+#    #+#             */
-/*   Updated: 2023/02/26 06:23:37 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/03 18:34:14 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ void	my_hook(mlx_key_data_t k_data, void *param)
 			move_left(game, game->p_cur[0], game->p_cur[1]);
 		if (k_data.key == MLX_KEY_RIGHT || k_data.key == MLX_KEY_D)
 			move_right(game, game->p_cur[0], game->p_cur[1]);
+		// printf("%d, %d\n", game->p_cur[0], game->p_cur[1]);
 	}	
 }

@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:17:16 by sutku             #+#    #+#             */
-/*   Updated: 2023/02/26 18:14:40 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/03 16:02:36 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,9 @@ void			move_up(t_game *game, int i, int j);
 void			move_down(t_game *game, int i, int j);
 void			move_left(t_game *game, int i, int j);
 void			move_right(t_game *game, int i, int j);
+void			hook(void *param);
+
+void	check_wlc(t_game *game, int i, int j);
+
 
 #endif

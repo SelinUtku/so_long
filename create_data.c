@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 06:26:41 by sutku             #+#    #+#             */
-/*   Updated: 2023/02/26 16:57:27 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/03 14:39:42 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	create_data(t_game *game)
 	game->p_num_mov = 0;
 	game->exist_msg = 0;
 	game->game_state = 0;
+	game->drc = 0;
 	game->str = NULL;
 }
 

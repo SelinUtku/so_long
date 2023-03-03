@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 19:37:10 by sutku             #+#    #+#             */
-/*   Updated: 2023/02/26 07:33:07 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/03 15:57:44 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	put_map_to_arr(t_game *game, char *path)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return ;
-	game->map_arr = malloc((game-> height * sizeof(char *)) + 1);
+	game->map_arr = malloc((game-> height + 1) * sizeof(char *));
 	game->map_arr[i] = get_next_line(fd);
-	while (game-> map_arr[i] != NULL)
+	while (game->map_arr && game-> map_arr[i] != NULL)
 	{
 		i++;
 		game->map_arr[i] = get_next_line(fd);
