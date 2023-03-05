@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 13:06:38 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/03 18:34:14 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/05 04:33:07 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,7 @@ void	my_hook(mlx_key_data_t k_data, void *param)
 	if (k_data.action == MLX_PRESS)
 	{
 		if (k_data.key == MLX_KEY_ESCAPE)
-		{
 			mlx_close_window(game->mlx);
-			// game->game_state = 0;//  ??
-			// return ;
-		}
 		if (k_data.key == MLX_KEY_UP || k_data.key == MLX_KEY_W)
 			move_up(game, game->p_cur[0] , game->p_cur[1]);
 		if (k_data.key == MLX_KEY_DOWN || k_data.key == MLX_KEY_S)
@@ -33,6 +29,5 @@ void	my_hook(mlx_key_data_t k_data, void *param)
 			move_left(game, game->p_cur[0], game->p_cur[1]);
 		if (k_data.key == MLX_KEY_RIGHT || k_data.key == MLX_KEY_D)
 			move_right(game, game->p_cur[0], game->p_cur[1]);
-		// printf("%d, %d\n", game->p_cur[0], game->p_cur[1]);
 	}	
 }

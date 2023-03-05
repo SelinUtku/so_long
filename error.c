@@ -6,13 +6,13 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:05:55 by sutku             #+#    #+#             */
-/*   Updated: 2023/02/22 20:13:49 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/05 06:36:09 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	error_message(char *ptr)
+void	error_message(char *ptr, t_game *game)
 {
 	int	i;
 
@@ -21,11 +21,13 @@ void	error_message(char *ptr)
 	{
 		while (ptr[i] != '\0')
 			i++;
+		free_map(game->map_arr);
 		write(2, ptr, i);
-		exit(-1);
+		exit(EXIT_FAILURE);
 	}
+	free_map(game->map_arr);
 	write(2, "Error\n", 6);
-	exit(-1);
+	exit(EXIT_FAILURE);
 }
 
 void	check_map(t_game *game)
@@ -48,14 +50,14 @@ void	check_map_assets(t_game *game)
 		while (j < game->width)
 		{
 			if ((i == 0 || i == game->height - 1) && game->map_arr[i][j] != '1')
-				error_message(W_ERROR);
+				error_message(W_ERROR, game);
 			if ((j == 0 || j == game->width - 1) && game->map_arr[i][j] != '1')
-				error_message(W_ERROR);
+				error_message(W_ERROR, game);
 			else
 				if ((game->map_arr[i][j] != '0') && (game->map_arr[i][j] != 'C')
 				&& (game-> map_arr[i][j] != '1') && (game->map_arr[i][j] != 'E')
 				&& (game->map_arr[i][j] != 'X') && (game->map_arr[i][j] != 'P'))
-					error_message(I_MAP);
+					error_message(I_MAP, game);
 			j++;
 		}
 		i++;
@@ -65,11 +67,11 @@ void	check_map_assets(t_game *game)
 void	check_num_assets(t_game *game)
 {
 	if (game->collectable < 1)
-		error_message(C_ERROR);
+		error_message(C_ERROR, game);
 	if (game->e_xit != 1)
-		error_message(EXIT_E);
+		error_message(EXIT_E, game);
 	if (game -> player != 1)
-		error_message(P_ERROR);
+		error_message(P_ERROR, game);
 	if (game->enemy != 1)
-		error_message(E_ERROR);
+		error_message(E_ERROR, game);
 }

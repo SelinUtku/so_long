@@ -6,14 +6,14 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:17:16 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/03 16:02:36 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/05 06:30:16 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include  "/Users/sutku/Projects/so_long/MLX42/include/MLX42/MLX42.h"
+# include "MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <memory.h>
@@ -81,6 +81,7 @@ typedef struct s_game
 	char		*rem_c_arr;
 	int			exist_msg;
 	int			game_state;
+	int			spd;
 	mlx_t		*mlx;
 	mlx_image_t	*msg;
 	mlx_image_t	*old_player;
@@ -91,8 +92,8 @@ typedef struct s_game
 	int			drc;
 }t_game;
 
-void			open_image(char *str);
-void			error_message(char *ptr);
+void			open_image(char *str, t_game *game);
+void			error_message(char *ptr, t_game *game);
 void			measure_map(t_game *game, char *path);
 void			read_map(t_game *game);
 void			create_data(t_game *game);
@@ -105,20 +106,20 @@ bool			**dfs_visited(t_game *game);
 bool			dfs_e(t_game *game, int i, int j, bool **visit);
 bool			dfs_c(t_game *game, int i, int j, bool **visit);
 void			check_collectable(t_game *game);
-mlx_image_t		*put_image_to_map(mlx_t *mlx, char *path);
+mlx_image_t		*put_image_to_map(t_game *game, char *path);
 void			put_assets_to_map(mlx_t *mlx, t_game *game, t_images *img);
-void			put_assets_to_images(mlx_t *mlx, t_images *img, t_game *game);
+void			put_assets_to_images(t_images *img, t_game *game);
 void			my_hook(mlx_key_data_t k_data, void *param);
 void			delete_images(mlx_t *mlx, t_images *img);
 void			string_to_map(t_game *game, t_string *str);
-void			delete_strings(mlx_t *mlx, t_string *old_str);
+void			delete_strings(mlx_t *mlx, t_string *old_str, t_game *game);
 void			move_up(t_game *game, int i, int j);
 void			move_down(t_game *game, int i, int j);
 void			move_left(t_game *game, int i, int j);
 void			move_right(t_game *game, int i, int j);
 void			hook(void *param);
-
-void	check_wlc(t_game *game, int i, int j);
-
+void			my_free(bool **arr, int i);
+void			free_map(char **arr);
+void			check_wlc(t_game *game, int i, int j);
 
 #endif
