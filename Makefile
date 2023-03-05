@@ -6,7 +6,7 @@
 #    By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 17:03:42 by sutku             #+#    #+#              #
-#    Updated: 2023/03/03 15:51:18 by sutku            ###   ########.fr        #
+#    Updated: 2023/03/05 04:43:25 by sutku            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ PRINTF_LIB	=	ftprintf/libftprintf.a
 
 CC		= 	cc
 RM		=   rm -f
-CFLAGS	=	-fsanitize=address
+CFLAGS	=	-Wall -Werror -Wextra -g # -fsanitize=address
 NAME	=	so_long
 
 DEF_COLOR = \033[0;39m
@@ -45,16 +45,16 @@ WHITE = \033[0;97m
 all:	$(NAME)
 
 $(NAME): $(SL_OBJ) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB) $(GNL_OBJ)
-	$(CC) $(CFLAGS) $(SL_OBJ) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB) $(GNL_OBJ) -o $(NAME) -lglfw -L /Users/$(USER)/homebrew/opt/glfw/lib/ -I ./MLX42/include
-	echo "so_long compiled successfully"
+	$(CC) $(CFLAGS) $(SL_OBJ) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB) $(GNL_OBJ) -o $(NAME)  -I MLX42/include -lglfw -L /Users/$(USER)/homebrew/opt/glfw/lib/
+	echo "$(GREEN)so_long compiled successfully$(DEF_COLOR)"
 
 $(LIBFT_LIB):
 	make bonus -C $(LIBFT) && make clean -C $(LIBFT)
-	echo "$(GREEN)LIBFT compiled successfully"
+	echo "$(GREEN)LIBFT compiled successfully$(DEF_COLOR)"
 
 $(PRINTF_LIB):
 	make -C $(PRINTF) && make clean -C $(PRINTF)
-	echo "Printf compiled successfully"
+	echo "$(GREEN)Printf compiled successfully$(DEF_COLOR)"
 $(MLX_LIB):
 	make -C $(MLX)
 
@@ -62,11 +62,11 @@ clean:
 	$(RM) $(SL_OBJ)
 	$(RM) $(GNL_OBJ)
 	$(RM) $(LIBFT_LIB) $(PRINTF_LIB)
-	echo "$(MAGENTA)Object-Files are cleaned!"
+	echo "$(MAGENTA)Object-Files are cleaned!$(DEF_COLOR)"
 
 fclean: clean
 	$(RM) $(NAME)
-	echo "$(MAGENTA)Programs / Libraries are cleaned!"
+	echo "$(MAGENTA)Programs / Libraries are cleaned!$(DEF_COLOR)"
 	
 re: fclean all 
 

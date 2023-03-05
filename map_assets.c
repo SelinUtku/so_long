@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 08:07:57 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/03 13:40:39 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/05 06:31:22 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	**dfs_visited(t_game *game)
 
 bool	dfs_c(t_game *game, int i, int j, bool **visit)
 {
-	if (visit[i][j] || game->map_arr[i][j] == '1')
+	if (visit[i][j] || game->map_arr[i][j] == '1' || game->map_arr[i][j] == 'E')
 		return (false);
 	if (i == game->col_index[0] && j == game->col_index[1])
 		return (true);
@@ -70,7 +70,12 @@ void	check_collectable(t_game *game)
 				game->col_index[0] = i;
 				game->col_index[1] = j;
 				if (!dfs_c(game, game->p_cur[0], game->p_cur[1], visited))
-					error_message(UN_COL);
+				{
+					my_free(visited, game->height);
+					error_message(UN_COL, game);
+				}
+				if (visited != NULL)
+					my_free(visited, game->height);
 			}
 		}
 	}
@@ -100,5 +105,10 @@ void	check_valid_path(t_game *game)
 
 	visited = dfs_visited(game);
 	if (!dfs_e(game, game->p_cur[0], game->p_cur[1], visited))
-		error_message(NO_PATH);
+	{
+		my_free(visited, game->height);
+		error_message(NO_PATH, game);
+	}
+	if (visited != NULL)
+		my_free(visited, game->height);
 }

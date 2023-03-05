@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 22:45:54 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/03 18:35:19 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/05 05:44:12 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	check_wlc(t_game *game, int i, int j)
 {
+	if (game->exist_msg == 1)
+			mlx_delete_image(game->mlx, game->msg);
+		game->exist_msg = 0;
 	if (game->map_arr[i][j] == 'X')
 		game->game_state = -1;
 	if (game->map_arr[i][j] == 'C')
@@ -30,6 +33,9 @@ void	check_wlc(t_game *game, int i, int j)
 	}
 	if (game->map_arr[i][j] == 'E' && game->collectable == 0)
 		game->game_state = 1;
+	game->spd = 0;
+	if (game->collectable <= 4)
+		game->spd = 1;
 }
 
 void	move_up(t_game *game, int i, int j)
@@ -43,7 +49,7 @@ void	move_up(t_game *game, int i, int j)
 		game->drc = 1;
 		game->p_num_mov++;
 	}
-	put_assets_to_images(game->mlx, game->imgs, game);
+	put_assets_to_images(game->imgs, game);
 	string_to_map(game, game->str);
 	return ;
 }
@@ -59,7 +65,7 @@ void	move_down(t_game *game, int i, int j)
 		game->drc = 0;
 		game->p_num_mov++;
 	}
-	put_assets_to_images(game->mlx, game->imgs, game);
+	put_assets_to_images(game->imgs, game);
 	string_to_map(game, game->str);
 	return ;
 }
@@ -75,7 +81,7 @@ void	move_left(t_game *game, int i, int j)
 		game->drc = 2;
 		game->p_num_mov++;
 	}
-	put_assets_to_images(game->mlx, game->imgs, game);
+	put_assets_to_images(game->imgs, game);
 	string_to_map(game, game->str);
 	return ;
 }
@@ -91,7 +97,7 @@ void	move_right(t_game *game, int i, int j)
 		game->drc = 3;
 		game->p_num_mov++;
 	}
-	put_assets_to_images(game->mlx, game->imgs, game);
+	put_assets_to_images(game->imgs, game);
 	string_to_map(game, game->str);
 	return ;
 }

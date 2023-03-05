@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 19:37:10 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/03 15:57:44 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/05 05:37:35 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	measure_map(t_game *game, char *path)
 			if (arr[i] == '\0')
 				break ;
 		if (width != i)
-			error_message(SQ_ERROR);
+			error_message(SQ_ERROR, game);
 		free(arr);
 		arr = get_next_line(fd);
 		count++;
@@ -49,7 +49,6 @@ void	put_map_to_arr(t_game *game, char *path)
 {
 	int	fd;
 	int	i;
-	int	j;
 
 	i = 0;
 	fd = open(path, O_RDONLY);
