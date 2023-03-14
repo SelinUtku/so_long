@@ -6,11 +6,73 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:08:02 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/14 21:26:08 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/14 21:59:58 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
+
+void	enemy_pos(t_game *game, int i, int j)
+{
+	static int		incr = 1;
+
+	if (game->map_arr[i + incr][j] == '1' || game->map_arr[i + incr][j] == 'C'
+			|| game->map_arr[i + incr][j] == 'E')
+		incr *= -1;
+	if (game->map_arr[i + incr][j] == 'P')
+	{
+		game->game_state = -1;
+		return ;
+	}
+	game->map_arr[i][j] = '0';
+	i += incr;
+	game->map_arr[i][j] = 'X';
+	game->en_idx[0] = i;
+}
+
+void	enemy_move(t_game *game, int i, int j, int sec)
+{
+	char	*name;
+
+	if (sec % 30 == 0)
+		name = "./img/bomb1.xpm42";
+	else if (sec % 15 == 0)
+		name = "./img/bomb2.xpm42";
+	if (game->game_state == 0)
+	{
+		if (sec % game->spd == 0)
+			enemy_pos(game, i, j);
+		game->imgs->en_one_img = put_image_to_map(game, name);
+		if (mlx_image_to_window(game->mlx, game->imgs->en_one_img,
+				j * 80, i * 80) < 0)
+			error_message(MLX_IMG_WND, game);
+	}
+	return ;
+}
+
+void	enemy_hook(void *param)
+{
+	static int	sec = 0;
+	t_game		*game;
+	int			i;
+	int			j;
+
+	game = param;
+	i = game->en_idx[0];
+	j = game->en_idx[1];
+	if (game->game_state == -1)
+	{
+		put_assets_to_images(game->imgs, game);
+		return ;
+	}
+	if (sec % 15 == 0 && game->game_state == 0)
+	{
+		if (game->imgs->en_one_img)
+			mlx_delete_image(game->mlx, game->imgs->en_one_img);
+		enemy_move(game, i, j, sec);
+	}
+	sec++;
+}
 
 void	key_hook(mlx_key_data_t k_data, void *param)
 {
@@ -41,6 +103,7 @@ int32_t	main(int argc, char **argv)
 	t_game			game;
 	mlx_t			*mlx;
 	t_images		img;
+	t_string		str;
 
 	if (argc != 2)
 		error_message(ARGC_ERROR, &game);
@@ -54,10 +117,12 @@ int32_t	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	game.mlx = mlx;
 	put_assets_to_images(&img, &game);
+	string_to_map(&game, &str);
+	mlx_loop_hook(game.mlx, &enemy_hook, &game);
 	mlx_key_hook(game.mlx, &key_hook, &game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	free_map(game.map_arr);
-	// system("leaks so_long");
+	// system("leaks sl_bonus");
 	return (EXIT_SUCCESS);
 }
