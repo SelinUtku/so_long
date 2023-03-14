@@ -6,11 +6,11 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 19:37:10 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/14 18:04:45 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/14 18:01:02 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	check_square(t_tmp *tmp, t_game *game)
 {
@@ -80,6 +80,12 @@ void	init_map_assets(t_game *game, int i, int j)
 		game->exit_idx[0] = i;
 		game->exit_idx[1] = j;
 		game->e_xit++;
+	}
+	else if (game-> map_arr[i][j] == 'X')
+	{
+		game->en_idx[0] = i;
+		game->en_idx[1] = j;
+		game-> enemy++;
 	}
 }
 

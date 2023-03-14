@@ -6,11 +6,11 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:05:55 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/14 18:02:59 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/14 18:01:14 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	error_message(char *ptr, t_game *game)
 {
@@ -58,7 +58,7 @@ void	check_map_assets(t_game *game)
 			else
 				if ((game->map_arr[i][j] != '0') && (game->map_arr[i][j] != 'C')
 				&& (game-> map_arr[i][j] != '1') && (game->map_arr[i][j] != 'E')
-				&& (game->map_arr[i][j] != 'P'))
+				&& (game->map_arr[i][j] != 'X') && (game->map_arr[i][j] != 'P'))
 					error_message(I_MAP, game);
 			j++;
 		}
@@ -74,4 +74,6 @@ void	check_num_assets(t_game *game)
 		error_message(EXIT_E, game);
 	if (game -> player != 1)
 		error_message(P_ERROR, game);
+	if (game->enemy != 1)
+		error_message(E_ERROR, game);
 }

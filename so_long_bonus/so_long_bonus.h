@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:17:16 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/14 18:07:14 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/14 17:49:26 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
-# include "MLX42/include/MLX42/MLX42.h"
+# include "/Users/sutku/Projects/so_long/MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <memory.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include "ftprintf/ft_printf.h"
-# include "gnl/get_next_line.h"
-# include "libft/libft.h"
+# include "/Users/sutku/Projects/so_long/ftprintf/ft_printf.h"
+# include "/Users/sutku/Projects/so_long/gnl/get_next_line.h"
+# include "/Users/sutku/Projects/so_long/libft/libft.h"
 
 # define W_ERROR "Invalid map ! Not Surronded with walls."
 # define I_MAP "Invalid map ! There is/are another character"
 # define C_ERROR "There is no Collectable in the map"
 # define EXIT_E "There is no Exit in the map"
 # define P_ERROR "Player number is not 1"
+# define E_ERROR "Enemy number is not 1"
 # define SQ_ERROR "The map is not square"
 # define NO_PATH "Unreachable Exit"
 # define UN_COL "At least one unreachable collectable"
@@ -45,18 +46,31 @@ typedef struct s_images
 	mlx_image_t	*p_left;
 	mlx_image_t	*p_right;
 	mlx_image_t	*p_up;
+	mlx_image_t	*rip_img;
 	mlx_image_t	*c_img;
 	mlx_image_t	*ruby_img;
 	mlx_image_t	*d_img;
 	mlx_image_t	*w_img;
 	mlx_image_t	*bg_img;
 	mlx_image_t	*win_img;
+	mlx_image_t	*en_one_img;
+	mlx_image_t	*en_two_img;
 }t_images;
+
+typedef struct s_string
+{
+	mlx_image_t	*score;
+	mlx_image_t	*score_point;
+	mlx_image_t	*num_col;
+	mlx_image_t	*remain_col;
+}t_string;
 
 typedef struct s_game
 {
 	int			collectable;
 	int			player;
+	int			enemy;
+	int			en_idx[2];
 	int			e_xit;
 	int			exit_idx[2];
 	int			width;
@@ -65,6 +79,9 @@ typedef struct s_game
 	char		**map_arr;
 	int			p_cur[2];
 	int			p_num_mov;
+	char		*mov_arr;
+	char		*rem_c_arr;
+	int			exist_msg;
 	int			game_state;
 	int			spd;
 	mlx_t		*mlx;
@@ -72,6 +89,8 @@ typedef struct s_game
 	mlx_image_t	*old_player;
 	t_images	*imgs;
 	t_images	*old_images;
+	t_string	*str;
+	t_string	*old_str;
 	int			drc;
 }t_game;
 
@@ -103,10 +122,13 @@ void			put_assets_to_map(mlx_t *mlx, t_game *game, t_images *img);
 void			put_assets_to_images(t_images *img, t_game *game);
 void			key_hook(mlx_key_data_t k_data, void *param);
 void			delete_images(mlx_t *mlx, t_images *img);
+void			string_to_map(t_game *game, t_string *str);
+void			delete_strings(mlx_t *mlx, t_string *old_str, t_game *game);
 void			move_up(t_game *game, int i, int j);
 void			move_down(t_game *game, int i, int j);
 void			move_left(t_game *game, int i, int j);
 void			move_right(t_game *game, int i, int j);
+void			enemy_hook(void *param);
 void			bool_free(bool **arr, int i);
 void			free_map(char **arr);
 void			check_wlc(t_game *game, int i, int j);
