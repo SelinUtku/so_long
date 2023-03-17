@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:17:16 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/16 22:59:09 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/17 18:44:34 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ bool			dfs_e(t_game *game, int i, int j, bool **visit);
 bool			dfs_c(t_game *game, int i, int j, bool **visit);
 void			check_collectable(t_game *game);
 mlx_image_t		*put_image_to_map(t_game *game, char *path);
-void			put_assets_to_map(mlx_t *mlx, t_game *game, t_images *img);
+void			put_assets_to_map(t_game *game, t_images *img);
 void			put_assets_to_images(t_images *img, t_game *game);
 void			key_hook(mlx_key_data_t k_data, void *param);
 void			delete_images(mlx_t *mlx, t_images *img);
@@ -134,5 +134,7 @@ void			enemy_hook(void *param);
 void			bool_free(bool **arr, int i);
 void			free_map(char **arr);
 void			check_wlc(t_game *game, int i, int j);
+void			rip_img(t_game *game);
+void			win_img(t_game *game, t_images *imgs);
 
 #endif

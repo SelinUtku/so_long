@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:10:23 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/16 22:45:42 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/17 18:54:50 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	put_assets_to_images(t_images *img, t_game *game)
 	img->d_img = put_image_to_map(game, "./img/door.xpm42");
 	img->ruby_img = put_image_to_map(game, "./img/ruby.xpm42");
 	img->s_win_img = put_image_to_map(game, "./img/s_win.xpm42");
-	put_assets_to_map(game->mlx, game, img);
+	img->b_win_img = put_image_to_map(game, "./img/b_win.xpm42");
+	put_assets_to_map(game, img);
 }
 
 void	other_img(t_game *game, t_images *img, int i, int j)
@@ -86,16 +87,15 @@ void	ply_all_images(t_game *game, t_images *img, int i, int j)
 			error_message(MLX_IMG_WND, game);
 }
 
-void	put_assets_to_map(mlx_t *mlx, t_game *game, t_images *img)
+void	put_assets_to_map(t_game *game, t_images *img)
 {
 	int	i;
 	int	j;
 
 	if (game->game_state == 1)
 	{
-		if (mlx_image_to_window(mlx, game->imgs->s_win_img, 0, 100) < 0)
-			error_message(MLX_IMG_WND, game);
-		ft_printf("WIN !");
+		win_img(game, game->imgs);
+		printf("WIN");
 		return ;
 	}
 	i = -1;

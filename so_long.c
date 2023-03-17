@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:08:02 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/16 23:59:14 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/17 18:55:12 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,5 @@ int32_t	main(int argc, char **argv)
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	free_map(game.map_arr);
-	// system("leaks so_long");
 	return (EXIT_SUCCESS);
 }

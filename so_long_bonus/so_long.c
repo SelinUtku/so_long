@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:08:02 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/17 00:01:05 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/17 19:06:20 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	enemy_pos(t_game *game, int i, int j)
 		if (game->map_arr[i + k][j] == 'P')
 		{
 			game->game_state = -1;
+			delete_strings(game->mlx, game->old_str, game);
 			return ;
 		}
 		game->map_arr[i][j] = '0';
@@ -125,6 +126,5 @@ int32_t	main(int argc, char **argv)
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	free_map(game.map_arr);
-	// system("leaks sl_bonus");
 	return (EXIT_SUCCESS);
 }

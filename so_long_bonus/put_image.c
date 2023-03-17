@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:10:23 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/16 23:53:24 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/17 19:08:32 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ void	put_assets_to_images(t_images *img, t_game *game)
 	img->d_img = put_image_to_map(game, "./img/door.xpm42");
 	img->ruby_img = put_image_to_map(game, "./img/ruby.xpm42");
 	img->s_rip_img = put_image_to_map(game, "./img/s_rip.xpm42");
+	img->b_rip_img = put_image_to_map(game, "./img/b_rip.xpm42");
 	img->s_win_img = put_image_to_map(game, "./img/s_win.xpm42");
+	img->b_win_img = put_image_to_map(game, "./img/b_win.xpm42");
 	img->en_one_img = put_image_to_map(game, "./img/bomb2.xpm42");
 	img->en_two_img = put_image_to_map(game, "./img/bomb1.xpm42");
-	put_assets_to_map(game->mlx, game, img);
+	put_assets_to_map(game, img);
 }
 
 void	other_img(t_game *game, t_images *img, int i, int j)
@@ -92,21 +94,19 @@ void	ply_all_images(t_game *game, t_images *img, int i, int j)
 			error_message(MLX_IMG_WND, game);
 }
 
-void	put_assets_to_map(mlx_t *mlx, t_game *game, t_images *img)
+void	put_assets_to_map(t_game *game, t_images *img)
 {
 	int	i;
 	int	j;
 
 	if (game->game_state == -1)
 	{
-		if (mlx_image_to_window(mlx, game->imgs->s_rip_img, 100, 75) < 0)
-			error_message(MLX_IMG_WND, game);
+		rip_img(game);
 		return ;
 	}
 	if (game->game_state == 1)
 	{
-		if (mlx_image_to_window(mlx, game->imgs->s_win_img, 60, 75) < 0)
-			error_message(MLX_IMG_WND, game);
+		win_img(game, game->imgs);
 		return ;
 	}
 	i = -1;
