@@ -6,7 +6,7 @@
 #    By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 17:03:42 by sutku             #+#    #+#              #
-#    Updated: 2023/03/16 16:28:41 by sutku            ###   ########.fr        #
+#    Updated: 2023/03/17 19:03:26 by sutku            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ PRINTF_LIB	=	ftprintf/libftprintf.a
 
 CC		= 	cc
 RM		=   rm -f
-CFLAGS	=	-Wall -Werror -Wextra -g # -fsanitize=address
+CFLAGS	=	-Wall -Werror -Wextra
 
 NAME	=	so_long
 NAME_B	=	sl_bonus
