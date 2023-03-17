@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:05:55 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/14 18:01:14 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/16 22:59:46 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	check_map_assets(t_game *game)
 
 void	check_num_assets(t_game *game)
 {
-	if (game->collectable < 1)
+	if (game->col < 1)
 		error_message(C_ERROR, game);
 	if (game->e_xit != 1)
 		error_message(EXIT_E, game);

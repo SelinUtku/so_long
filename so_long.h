@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:17:16 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/14 18:07:14 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/16 22:46:08 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ typedef struct s_images
 	mlx_image_t	*d_img;
 	mlx_image_t	*w_img;
 	mlx_image_t	*bg_img;
-	mlx_image_t	*win_img;
+	mlx_image_t	*s_win_img;
+	mlx_image_t	*b_win_img;
 }t_images;
 
 typedef struct s_game

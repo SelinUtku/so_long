@@ -6,22 +6,22 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:17:16 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/14 17:49:26 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/16 22:59:09 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H
 
-# include "/Users/sutku/Projects/so_long/MLX42/include/MLX42/MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <memory.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include "/Users/sutku/Projects/so_long/ftprintf/ft_printf.h"
-# include "/Users/sutku/Projects/so_long/gnl/get_next_line.h"
-# include "/Users/sutku/Projects/so_long/libft/libft.h"
+# include "../ftprintf/ft_printf.h"
+# include "../gnl/get_next_line.h"
+# include "../libft/libft.h"
 
 # define W_ERROR "Invalid map ! Not Surronded with walls."
 # define I_MAP "Invalid map ! There is/are another character"
@@ -46,13 +46,15 @@ typedef struct s_images
 	mlx_image_t	*p_left;
 	mlx_image_t	*p_right;
 	mlx_image_t	*p_up;
-	mlx_image_t	*rip_img;
+	mlx_image_t	*b_rip_img;
+	mlx_image_t	*s_rip_img;
 	mlx_image_t	*c_img;
 	mlx_image_t	*ruby_img;
 	mlx_image_t	*d_img;
 	mlx_image_t	*w_img;
 	mlx_image_t	*bg_img;
-	mlx_image_t	*win_img;
+	mlx_image_t	*s_win_img;
+	mlx_image_t	*b_win_img;
 	mlx_image_t	*en_one_img;
 	mlx_image_t	*en_two_img;
 }t_images;
@@ -67,7 +69,7 @@ typedef struct s_string
 
 typedef struct s_game
 {
-	int			collectable;
+	int			col;
 	int			player;
 	int			enemy;
 	int			en_idx[2];

@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 06:26:41 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/14 20:23:48 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/16 23:01:22 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	create_data(t_game *game)
 {
-	game->collectable = 0;
+	game->col = 0;
 	game->player = 0;
 	game->enemy = 0;
 	game->e_xit = 0;
@@ -44,7 +44,7 @@ void	string_to_map(t_game *game, t_string *str)
 	if (game->game_state != -1 && game->game_state != 1)
 	{
 		game->mov_arr = ft_itoa(game->p_num_mov);
-		game->rem_c_arr = ft_itoa(game->collectable);
+		game->rem_c_arr = ft_itoa(game->col);
 		str->score = mlx_put_string(game->mlx, "MOVES : ",
 				10, (game->height) * 80 + 10);
 		str->score_point = mlx_put_string(game->mlx, game->mov_arr,
