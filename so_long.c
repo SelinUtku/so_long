@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:08:02 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/14 21:26:08 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/16 23:59:14 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ void	key_hook(mlx_key_data_t k_data, void *param)
 	{
 		if (k_data.key == MLX_KEY_ESCAPE)
 			mlx_close_window(game->mlx);
-		if (game->game_state == 0 &&
-			(k_data.key == MLX_KEY_UP || k_data.key == MLX_KEY_W))
+		if (game->game_state == 0 && (k_data.key == MLX_KEY_UP
+				|| k_data.key == MLX_KEY_W))
 			move_up(game, game->p_cur[0], game->p_cur[1]);
-		if (game->game_state == 0 &&
-			(k_data.key == MLX_KEY_DOWN || k_data.key == MLX_KEY_S))
+		if (game->game_state == 0 && (k_data.key == MLX_KEY_DOWN
+				|| k_data.key == MLX_KEY_S))
 			move_down(game, game->p_cur[0], game->p_cur[1]);
-		if (game->game_state == 0 &&
-			(k_data.key == MLX_KEY_LEFT || k_data.key == MLX_KEY_A))
+		if (game->game_state == 0 && (k_data.key == MLX_KEY_LEFT
+				|| k_data.key == MLX_KEY_A))
 			move_left(game, game->p_cur[0], game->p_cur[1]);
-		if (game->game_state == 0 &&
-			(k_data.key == MLX_KEY_RIGHT || k_data.key == MLX_KEY_D))
+		if (game->game_state == 0 && (k_data.key == MLX_KEY_RIGHT
+				|| k_data.key == MLX_KEY_D))
 			move_right(game, game->p_cur[0], game->p_cur[1]);
 	}	
 }
@@ -49,7 +49,7 @@ int32_t	main(int argc, char **argv)
 	put_map_to_arr(&game, argv[1]);
 	read_map(&game);
 	check_map(&game);
-	mlx = mlx_init(game.width * 80, game.height * 80 + 100, "so_long", true);
+	mlx = mlx_init(game.width * 80, game.height * 80, "so_long", true);
 	if (!mlx)
 		return (EXIT_FAILURE);
 	game.mlx = mlx;

@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:03:47 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/14 18:04:58 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/16 22:46:20 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ void	delete_images(mlx_t *mlx, t_images *img)
 	mlx_delete_image(mlx, img->p_up);
 	mlx_delete_image(mlx, img->p_left);
 	mlx_delete_image(mlx, img->p_right);
-	mlx_delete_image(mlx, img->win_img);
+	mlx_delete_image(mlx, img->s_win_img);
 }

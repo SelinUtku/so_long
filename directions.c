@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 22:45:54 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/14 21:20:04 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/16 23:55:56 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	check_wlc(t_game *game, int i, int j)
 		game->game_state = 1;
 	if (game->map_arr[i][j] == 'C')
 		game->collectable--;
-	// if (game->map_arr[i][j] != 'E' && game->collectable == 0)
-	// 	ft_printf("Let's go home ! \n");
 	if (game->map_arr[i][j] == 'E' && game->collectable != 0)
 		ft_printf("MESSAGE : I need more radishes\n");
 }

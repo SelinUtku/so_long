@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 19:37:10 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/14 18:01:02 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/16 23:00:19 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	put_map_to_arr(t_game *game, char *path)
 void	init_map_assets(t_game *game, int i, int j)
 {
 	if (game-> map_arr[i][j] == 'C')
-		game->collectable++;
+		game->col++;
 	else if (game-> map_arr[i][j] == 'P')
 	{
 		game->p_cur[0] = i;

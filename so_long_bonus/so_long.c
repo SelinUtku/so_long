@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:08:02 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/14 21:59:58 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/17 00:01:05 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,22 @@
 
 void	enemy_pos(t_game *game, int i, int j)
 {
-	static int		incr = 1;
+	static int	k = 1;
 
-	if (game->map_arr[i + incr][j] == '1' || game->map_arr[i + incr][j] == 'C'
-			|| game->map_arr[i + incr][j] == 'E')
-		incr *= -1;
-	if (game->map_arr[i + incr][j] == 'P')
+	if (game->map_arr[i + k][j] == '1' || game->map_arr[i + k][j] == 'C'
+			|| game->map_arr[i + k][j] == 'E')
+		k *= -1;
+	else
 	{
-		game->game_state = -1;
-		return ;
+		if (game->map_arr[i + k][j] == 'P')
+		{
+			game->game_state = -1;
+			return ;
+		}
+		game->map_arr[i][j] = '0';
+		game->map_arr[i + k][j] = 'X';
+		game->en_idx[0] = i + k;
 	}
-	game->map_arr[i][j] = '0';
-	i += incr;
-	game->map_arr[i][j] = 'X';
-	game->en_idx[0] = i;
 }
 
 void	enemy_move(t_game *game, int i, int j, int sec)
@@ -83,17 +85,17 @@ void	key_hook(mlx_key_data_t k_data, void *param)
 	{
 		if (k_data.key == MLX_KEY_ESCAPE)
 			mlx_close_window(game->mlx);
-		if (game->game_state == 0 &&
-			(k_data.key == MLX_KEY_UP || k_data.key == MLX_KEY_W))
+		if (game->game_state == 0 && (k_data.key == MLX_KEY_UP
+				|| k_data.key == MLX_KEY_W))
 			move_up(game, game->p_cur[0], game->p_cur[1]);
-		if (game->game_state == 0 &&
-			(k_data.key == MLX_KEY_DOWN || k_data.key == MLX_KEY_S))
+		if (game->game_state == 0 && (k_data.key == MLX_KEY_DOWN
+				|| k_data.key == MLX_KEY_S))
 			move_down(game, game->p_cur[0], game->p_cur[1]);
-		if (game->game_state == 0 &&
-			(k_data.key == MLX_KEY_LEFT || k_data.key == MLX_KEY_A))
+		if (game->game_state == 0 && (k_data.key == MLX_KEY_LEFT
+				|| k_data.key == MLX_KEY_A))
 			move_left(game, game->p_cur[0], game->p_cur[1]);
-		if (game->game_state == 0 &&
-			(k_data.key == MLX_KEY_RIGHT || k_data.key == MLX_KEY_D))
+		if (game->game_state == 0 && (k_data.key == MLX_KEY_RIGHT
+				|| k_data.key == MLX_KEY_D))
 			move_right(game, game->p_cur[0], game->p_cur[1]);
 	}	
 }

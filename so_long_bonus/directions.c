@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 22:45:54 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/14 21:19:52 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/16 22:59:22 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,25 @@ void	check_wlc(t_game *game, int i, int j)
 		game->exist_msg = 0;
 	if (game->map_arr[i][j] == 'X')
 		game->game_state = -1;
-	if (game->map_arr[i][j] == 'E' && game->collectable == 0)
+	if (game->map_arr[i][j] == 'E' && game->col == 0)
 		game->game_state = 1;
 	if (game->map_arr[i][j] == 'C')
-		game->collectable--;
-	if (game->map_arr[i][j] != 'E' && game->collectable == 0)
+		game->col--;
+	if (game->game_state == 0 && game->map_arr[i][j] != 'E'
+			&& game->col == 0)
 	{
 		game->exist_msg = 1;
 		game->msg = mlx_put_string(game->mlx, "MESSAGE : Lets go home !",
 				10, (game->height) * 80 + 50);
 	}
-	if (game->map_arr[i][j] == 'E' && game->collectable != 0)
+	if (game->game_state == 0 && game->map_arr[i][j] == 'E' && game->col != 0)
 	{	
 		game->exist_msg = 1;
 		game->msg = mlx_put_string(game->mlx, "MESSAGE : I need more radishes",
 				10, (game->height) * 80 + 50);
 	}
 	game->spd = 75;
-	if (game->collectable <= 4)
+	if (game->col <= 5)
 		game->spd = 30;
 }
 
