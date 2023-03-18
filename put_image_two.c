@@ -6,7 +6,7 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:03:47 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/17 18:58:47 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/18 20:46:56 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	delete_images(mlx_t *mlx, t_images *img)
 
 void	win_img(t_game *game, t_images *imgs)
 {
-	if (game->height < 5)
+	if (game->height <= 5)
 	{
-		if (mlx_image_to_window(game->mlx, imgs->s_win_img, 0, 10) < 0)
+		if (mlx_image_to_window(game->mlx, imgs->s_win_img, 0, 40) < 0)
 			error_message(MLX_IMG_WND, game);
 	}
 	else
-		if (mlx_image_to_window(game->mlx, imgs->b_win_img, 0, 10) < 0)
+		if (mlx_image_to_window(game->mlx, imgs->b_win_img, 0, 40) < 0)
 			error_message(MLX_IMG_WND, game);
 }

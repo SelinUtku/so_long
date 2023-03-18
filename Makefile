@@ -6,7 +6,7 @@
 #    By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 17:03:42 by sutku             #+#    #+#              #
-#    Updated: 2023/03/18 18:57:21 by sutku            ###   ########.fr        #
+#    Updated: 2023/03/18 20:26:44 by sutku            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,16 +16,15 @@ SL_SRC		=	so_long.c error.c put_image.c map_control.c create_data.c map_assets.c
 				directions.c put_image_two.c
 SL_OBJ		=	$(SL_SRC:.c=.o)
 
-BONUS_SRC	=	so_long_bonus/so_long.c so_long_bonus/error.c so_long_bonus/put_image.c\
-				so_long_bonus/map_control.c so_long_bonus/create_data.c so_long_bonus/map_assets.c\
-				so_long_bonus/directions.c so_long_bonus/put_image_two.c
+BONUS_SRC	=	sl_bonus/so_long.c sl_bonus/error.c sl_bonus/put_image.c\
+				sl_bonus/map_control.c sl_bonus/create_data.c sl_bonus/map_assets.c\
+				sl_bonus/directions.c sl_bonus/put_image_two.c
 BONUS_OBJ	=	$(BONUS_SRC:.c=.o)
 
 GNL_SRC		=	gnl/get_next_line_utils.c gnl/get_next_line.c
 GNL_OBJ		=	$(GNL_SRC:.c=.o)
 
-MLX			=	MLX42/build/
-MLX_LIB		=	MLX42/build/libmlx42.a
+MLX_LIB		=	MLX42/libmlx42.a
 
 LIBFT		=	libft/
 LIBFT_LIB	=	libft/libft.a
@@ -38,7 +37,7 @@ RM		=   rm -f
 CFLAGS	=	-Wall -Werror -Wextra
 
 NAME	=	so_long
-NAME_B	=	sl_bonus
+NAME_B	=	so_long_bonus
 
 DEF_COLOR = \033[0;39m
 RED = \033[0;91m
@@ -66,9 +65,6 @@ $(LIBFT_LIB):
 $(PRINTF_LIB):
 	make -C $(PRINTF) && make clean -C $(PRINTF)
 	echo "$(GREEN)Printf compiled successfully$(DEF_COLOR)"
-
-$(MLX_LIB):
-	make $(MLX)
 
 clean:
 	$(RM) $(SL_OBJ)
