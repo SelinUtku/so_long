@@ -6,14 +6,14 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:17:16 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/18 20:24:19 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/18 21:26:12 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "MLX42/include/MLX42.h"
+# include "MLXLib/include/MLX42.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <memory.h>

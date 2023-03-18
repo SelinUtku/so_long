@@ -6,7 +6,7 @@
 #    By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 17:03:42 by sutku             #+#    #+#              #
-#    Updated: 2023/03/18 20:26:44 by sutku            ###   ########.fr        #
+#    Updated: 2023/03/18 21:26:32 by sutku            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ BONUS_OBJ	=	$(BONUS_SRC:.c=.o)
 GNL_SRC		=	gnl/get_next_line_utils.c gnl/get_next_line.c
 GNL_OBJ		=	$(GNL_SRC:.c=.o)
 
-MLX_LIB		=	MLX42/libmlx42.a
+MLX_LIB		=	MLXLib/libmlx42.a
 
 LIBFT		=	libft/
 LIBFT_LIB	=	libft/libft.a
