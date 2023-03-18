@@ -6,7 +6,7 @@
 #    By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 17:03:42 by sutku             #+#    #+#              #
-#    Updated: 2023/03/18 21:26:32 by sutku            ###   ########.fr        #
+#    Updated: 2023/03/18 21:39:00 by sutku            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,11 +51,11 @@ WHITE = \033[0;97m
 all:	$(NAME)
 
 $(NAME): $(SL_OBJ) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB) $(GNL_OBJ)
-	$(CC) $(CFLAGS) $(SL_OBJ) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB) $(GNL_OBJ) -o $(NAME)  -I MLX42/include -lglfw -L /Users/$(USER)/homebrew/opt/glfw/lib/
+	$(CC) $(CFLAGS) $(SL_OBJ) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB) $(GNL_OBJ) -o $(NAME)  -I MLXLib/include -lglfw -L /Users/$(USER)/homebrew/opt/glfw/lib/
 	echo "$(GREEN)so_long compiled successfully$(DEF_COLOR)"
 
 $(NAME_B): $(BONUS_OBJ) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB) $(GNL_OBJ)
-	$(CC) $(CFLAGS) $(BONUS_OBJ) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB) $(GNL_OBJ) -o $(NAME_B) -I MLX42/include -lglfw -L /Users/$(USER)/homebrew/opt/glfw/lib/
+	$(CC) $(CFLAGS) $(BONUS_OBJ) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB) $(GNL_OBJ) -o $(NAME_B) -I MLXLib/include -lglfw -L /Users/$(USER)/homebrew/opt/glfw/lib/
 	echo "$(GREEN)so_long_bonus compiled successfully$(DEF_COLOR)"
 
 $(LIBFT_LIB):
