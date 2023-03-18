@@ -6,11 +6,11 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:10:23 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/17 18:54:50 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/17 19:08:32 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 mlx_image_t	*put_image_to_map(t_game *game, char *path)
 {
@@ -45,8 +45,12 @@ void	put_assets_to_images(t_images *img, t_game *game)
 	img->c_img = put_image_to_map(game, "./img/col.xpm42");
 	img->d_img = put_image_to_map(game, "./img/door.xpm42");
 	img->ruby_img = put_image_to_map(game, "./img/ruby.xpm42");
+	img->s_rip_img = put_image_to_map(game, "./img/s_rip.xpm42");
+	img->b_rip_img = put_image_to_map(game, "./img/b_rip.xpm42");
 	img->s_win_img = put_image_to_map(game, "./img/s_win.xpm42");
 	img->b_win_img = put_image_to_map(game, "./img/b_win.xpm42");
+	img->en_one_img = put_image_to_map(game, "./img/bomb2.xpm42");
+	img->en_two_img = put_image_to_map(game, "./img/bomb1.xpm42");
 	put_assets_to_map(game, img);
 }
 
@@ -60,13 +64,16 @@ void	other_img(t_game *game, t_images *img, int i, int j)
 	if (game->map_arr[i][j] == '1' && game->game_state == 0)
 		if (mlx_image_to_window(game->mlx, img->w_img, j * 80, i * 80) < 0)
 			error_message(MLX_IMG_WND, game);
-	if (game->map_arr[i][j] == 'E' && game->collectable == 0 &&
+	if (game->map_arr[i][j] == 'E' && game->col == 0 &&
 			game->game_state == 0)
 		if (mlx_image_to_window(game->mlx, img->ruby_img, j * 80, i * 80) < 0)
 			error_message(MLX_IMG_WND, game);
-	if (game->map_arr[i][j] == 'E' && game->collectable != 0 &&
+	if (game->map_arr[i][j] == 'E' && game->col != 0 &&
 			game->game_state == 0)
 		if (mlx_image_to_window(game->mlx, img->d_img, j * 80, i * 80) < 0)
+			error_message(MLX_IMG_WND, game);
+	if (game->map_arr[i][j] == 'X' && game->game_state == 0)
+		if (mlx_image_to_window(game->mlx, img->en_one_img, j * 80, i * 80) < 0)
 			error_message(MLX_IMG_WND, game);
 }
 
@@ -92,10 +99,14 @@ void	put_assets_to_map(t_game *game, t_images *img)
 	int	i;
 	int	j;
 
+	if (game->game_state == -1)
+	{
+		rip_img(game);
+		return ;
+	}
 	if (game->game_state == 1)
 	{
 		win_img(game, game->imgs);
-		printf("WIN");
 		return ;
 	}
 	i = -1;

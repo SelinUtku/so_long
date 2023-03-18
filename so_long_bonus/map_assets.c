@@ -6,11 +6,11 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 08:07:57 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/14 14:53:48 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/14 21:55:04 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 bool	**dfs_visited(t_game *game)
 {

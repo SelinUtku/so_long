@@ -6,26 +6,45 @@
 /*   By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 22:45:54 by sutku             #+#    #+#             */
-/*   Updated: 2023/03/16 23:55:56 by sutku            ###   ########.fr       */
+/*   Updated: 2023/03/16 22:59:22 by sutku            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	check_wlc(t_game *game, int i, int j)
 {
-	if (game->map_arr[i][j] == 'E' && game->collectable == 0)
+	if (game->exist_msg == 1)
+		mlx_delete_image(game->mlx, game->msg);
+		game->exist_msg = 0;
+	if (game->map_arr[i][j] == 'X')
+		game->game_state = -1;
+	if (game->map_arr[i][j] == 'E' && game->col == 0)
 		game->game_state = 1;
 	if (game->map_arr[i][j] == 'C')
-		game->collectable--;
-	if (game->map_arr[i][j] == 'E' && game->collectable != 0)
-		ft_printf("MESSAGE : I need more radishes\n");
+		game->col--;
+	if (game->game_state == 0 && game->map_arr[i][j] != 'E'
+			&& game->col == 0)
+	{
+		game->exist_msg = 1;
+		game->msg = mlx_put_string(game->mlx, "MESSAGE : Lets go home !",
+				10, (game->height) * 80 + 50);
+	}
+	if (game->game_state == 0 && game->map_arr[i][j] == 'E' && game->col != 0)
+	{	
+		game->exist_msg = 1;
+		game->msg = mlx_put_string(game->mlx, "MESSAGE : I need more radishes",
+				10, (game->height) * 80 + 50);
+	}
+	game->spd = 75;
+	if (game->col <= 5)
+		game->spd = 30;
 }
 
 void	move_up(t_game *game, int i, int j)
 {
 	check_wlc(game, i - 1, j);
-	if (game->map_arr[i - 1][j] != 'E'
+	if (game->game_state != -1 && game->map_arr[i - 1][j] != 'E'
 			&& game->map_arr[i - 1][j] != '1')
 	{
 		game->map_arr[i - 1][j] = 'P';
@@ -33,60 +52,59 @@ void	move_up(t_game *game, int i, int j)
 		game->map_arr[i][j] = '0';
 		game->drc = 1;
 		game->p_num_mov++;
-		if (game->game_state == 0)
-			ft_printf("MOVES : %d\n", game->p_num_mov);
 	}
 	put_assets_to_images(game->imgs, game);
+	string_to_map(game, game->str);
 	return ;
 }
 
 void	move_down(t_game *game, int i, int j)
 {
 	check_wlc(game, i + 1, j);
-	if (game->map_arr[i + 1][j] != 'E' && game->map_arr[i + 1][j] != '1')
+	if (game->game_state != -1 && game->map_arr[i + 1][j] != 'E' &&
+			game->map_arr[i + 1][j] != '1')
 	{
 		game->map_arr[i + 1][j] = 'P';
 		game->p_cur[0] = i + 1;
 		game->map_arr[i][j] = '0';
 		game->drc = 0;
 		game->p_num_mov++;
-		if (game->game_state == 0)
-			ft_printf("MOVES : %d\n", game->p_num_mov);
 	}
 	put_assets_to_images(game->imgs, game);
+	string_to_map(game, game->str);
 	return ;
 }
 
 void	move_left(t_game *game, int i, int j)
 {
 	check_wlc(game, i, j - 1);
-	if (game->map_arr[i][j - 1] != 'E' && game->map_arr[i][j - 1] != '1')
+	if (game->game_state != -1 && game->map_arr[i][j - 1] != 'E' &&
+			game->map_arr[i][j - 1] != '1')
 	{
 		game->map_arr[i][j - 1] = 'P';
 		game->p_cur[1] = j - 1;
 		game->map_arr[i][j] = '0';
 		game->drc = 2;
 		game->p_num_mov++;
-		if (game->game_state == 0)
-			ft_printf("MOVES : %d\n", game->p_num_mov);
 	}
 	put_assets_to_images(game->imgs, game);
+	string_to_map(game, game->str);
 	return ;
 }
 
 void	move_right(t_game *game, int i, int j)
 {
 	check_wlc(game, i, j + 1);
-	if (game->map_arr[i][j + 1] != 'E' && game->map_arr[i][j + 1] != '1')
+	if (game->game_state != -1 && game->map_arr[i][j + 1] != 'E'
+			&& game->map_arr[i][j + 1] != '1')
 	{
 		game->map_arr[i][j + 1] = 'P';
 		game->p_cur[1] = j + 1;
 		game->map_arr[i][j] = '0';
 		game->drc = 3;
 		game->p_num_mov++;
-		if (game->game_state == 0)
-			ft_printf("MOVES : %d\n", game->p_num_mov);
 	}
 	put_assets_to_images(game->imgs, game);
+	string_to_map(game, game->str);
 	return ;
 }
