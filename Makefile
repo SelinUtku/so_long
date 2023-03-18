@@ -6,7 +6,7 @@
 #    By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 17:03:42 by sutku             #+#    #+#              #
-#    Updated: 2023/03/17 19:03:26 by sutku            ###   ########.fr        #
+#    Updated: 2023/03/18 18:49:00 by sutku            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ $(PRINTF_LIB):
 	echo "$(GREEN)Printf compiled successfully$(DEF_COLOR)"
 
 $(MLX_LIB):
-	make -C $(MLX)
+	cmake -B build $(MLX)
 
 clean:
 	$(RM) $(SL_OBJ)
