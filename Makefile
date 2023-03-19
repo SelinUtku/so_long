@@ -6,7 +6,7 @@
 #    By: sutku <sutku@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/12 17:03:42 by sutku             #+#    #+#              #
-#    Updated: 2023/03/18 21:39:00 by sutku            ###   ########.fr        #
+#    Updated: 2023/03/19 19:28:26 by sutku            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ BONUS_OBJ	=	$(BONUS_SRC:.c=.o)
 GNL_SRC		=	gnl/get_next_line_utils.c gnl/get_next_line.c
 GNL_OBJ		=	$(GNL_SRC:.c=.o)
 
-MLX_LIB		=	MLXLib/libmlx42.a
+MLX			=	MLX42/build
+MLX_LIB		=	MLX42/build/libmlx42.a
 
 LIBFT		=	libft/
 LIBFT_LIB	=	libft/libft.a
@@ -51,12 +52,17 @@ WHITE = \033[0;97m
 all:	$(NAME)
 
 $(NAME): $(SL_OBJ) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB) $(GNL_OBJ)
-	$(CC) $(CFLAGS) $(SL_OBJ) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB) $(GNL_OBJ) -o $(NAME)  -I MLXLib/include -lglfw -L /Users/$(USER)/homebrew/opt/glfw/lib/
+	$(CC) $(CFLAGS) $(SL_OBJ) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB) $(GNL_OBJ) -o $(NAME)  -I MLX42/include -lglfw -L /Users/$(USER)/homebrew/opt/glfw/lib/
 	echo "$(GREEN)so_long compiled successfully$(DEF_COLOR)"
 
 $(NAME_B): $(BONUS_OBJ) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB) $(GNL_OBJ)
-	$(CC) $(CFLAGS) $(BONUS_OBJ) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB) $(GNL_OBJ) -o $(NAME_B) -I MLXLib/include -lglfw -L /Users/$(USER)/homebrew/opt/glfw/lib/
+	$(CC) $(CFLAGS) $(BONUS_OBJ) $(MLX_LIB) $(LIBFT_LIB) $(PRINTF_LIB) $(GNL_OBJ) -o $(NAME_B) -I MLX42/include -lglfw -L /Users/$(USER)/homebrew/opt/glfw/lib/
 	echo "$(GREEN)so_long_bonus compiled successfully$(DEF_COLOR)"
+
+$(MLX_LIB):
+	cd MLX42 && cmake -B build && cd ..
+	make -C $(MLX)
+	echo "$(YELLOW)MLX42 compiled successfully$(DEF_COLOR)"
 
 $(LIBFT_LIB):
 	make bonus -C $(LIBFT) && make clean -C $(LIBFT)
@@ -81,4 +87,4 @@ bonus: $(NAME_B)
 
 re: fclean all 
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
